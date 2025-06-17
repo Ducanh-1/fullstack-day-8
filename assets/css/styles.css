@@ -84,24 +84,36 @@ h6 {
 }
 .header .nav .sub-menu {
   position: absolute;
-  background-color: #fff;
+  background: #fff;
   top: 34px;
   width: 240px;
-  display: none;
+  /* display: none; */
+  overflow: hidden;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: all 0.3s ease;
 }
 .nav > li:hover .sub-menu {
   display: block;
+  transform: scaleY(1);
+  transition: 0.3s;
 }
 .header .nav .sub-menu a {
   color: #333;
   display: block;
   padding: 15px 15px;
   border-bottom: 1px solid #ccc;
+  transition: all 0.5s ease;
 }
 .header .nav .sub-menu li:hover {
-  background: pink;
+  background: var(--primary);
 }
-
+.header .nav .sub-menu li {
+  transition: all 0.5s ease;
+}
+.header .nav .sub-menu a:hover {
+  translate: 8px 0;
+}
 .header .nav a {
   padding: 17px 25px;
   font-family: var(--font-heading);
@@ -138,6 +150,10 @@ h6 {
 }
 .breadcrumbs a {
   text-decoration: none;
+  transition: 0.5s;
+}
+.breadcrumbs > li a:hover {
+  color: var(--secondary);
 }
 /* end top page */
 .main {
@@ -185,9 +201,12 @@ h6 {
   padding: 0 25px;
   text-decoration: none;
   color: #000000b3;
+  translate: 0 0;
+  transition: all 0.5s ease;
 }
 .menu a:hover {
   color: var(--secondary);
+  translate: 10px 0;
 }
 .menu li + li {
   border-top: 1px solid #0000000d;
@@ -204,6 +223,7 @@ h6 {
   border-radius: 15px;
   height: 30px;
   line-height: 30px;
+  transition: all 0.5s ease;
 }
 .topics .active a,
 .topics a:hover {
@@ -226,9 +246,22 @@ h6 {
   margin-left: var(--spacing);
   border: 1px solid #0000000d;
 }
+.course-item:hover .thumb-wrapper {
+  scale: 1.1;
+  opacity: 0.7;
+}
+.course-item:hover .title a {
+  color: var(--primary);
+}
+.image {
+  overflow: hidden;
+}
+
 .course-item .thumb-wrapper {
   display: block;
   aspect-ratio: 1 / 0.8;
+  scale: 1;
+  transition: all 0.7s ease;
 }
 .course-item .thumb {
   display: block;
@@ -246,6 +279,7 @@ h6 {
   font-size: 1.8rem;
   text-decoration: none;
   color: #464646;
+  transition: all 0.7s ease;
 }
 .course-item .desc {
   margin: 20px 0;
@@ -279,7 +313,83 @@ h6 {
   text-decoration: none;
   text-align: center;
   margin-left: auto;
+  transition: all 0.5s ease;
 }
+.course-btn:hover {
+  translate: 0 -5px;
+}
+
+.course-btn:hover::before {
+  opacity: 1;
+  translate: 0 5px;
+}
+
+.course-btn {
+  position: relative;
+}
+
+.course-btn::before {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: "";
+  top: 100%;
+  left: 5%;
+  height: 10px;
+  width: 90%;
+  opacity: 0;
+  background: -webkit-radial-gradient(
+    center,
+    ellipse,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0) 80%
+  );
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0) 80%
+  );
+
+  transition: 0.3s;
+}
+.course-btn2:hover {
+  translate: 0 -5px;
+}
+
+.course-btn2:hover::before {
+  opacity: 1;
+  translate: 0 5px;
+}
+
+.course-btn2 {
+  position: relative;
+}
+
+.course-btn2::before {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: "";
+  top: 100%;
+  left: 5%;
+  height: 10px;
+  width: 90%;
+  opacity: 0;
+  background: -webkit-radial-gradient(
+    center,
+    ellipse,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0) 80%
+  );
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0) 80%
+  );
+
+  transition: 0.3s;
+}
+
 .course-item .course-btn2 {
   height: 32px;
   line-height: 32px;
@@ -292,11 +402,16 @@ h6 {
   text-align: center;
   margin-left: auto;
   font-weight: 700;
+  transition: all 0.5s ease;
 }
 .stt {
+  margin-left: 30px;
   display: flex;
   gap: 8px;
   padding-top: 45px;
+}
+.stt .top1 {
+  border-color: var(--secondary);
 }
 .stt .stt-top {
   display: block;
@@ -356,6 +471,7 @@ h6 {
   display: block;
   text-decoration: none;
   height: 30px;
+  transition: 0.5s;
 }
 .footer1 a:hover {
   color: var(--primary);
@@ -383,8 +499,44 @@ h6 {
   color: #fff;
   background: var(--primary);
   border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
-.footer2 .but:hover {
-  background: #fff;
+.but::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scale(0);
+  transform-origin: center;
+  transition: 0.5s;
+  border-radius: 20px;
+  z-index: -1;
+}
+.but:hover {
   color: var(--primary);
+}
+.footer2 .but:hover::before {
+  background: #fff;
+  transform: scale(1);
+}
+.up {
+  display: flex;
+  position: fixed;
+  right: 5px;
+  bottom: 5px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 25px;
+  height: 40px;
+  width: 40px;
+  align-items: center;
+  justify-content: center;
+}
+html,
+body {
+  scroll-behavior: smooth;
 }
